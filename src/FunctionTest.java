@@ -18,44 +18,44 @@ class FunctionTest {
 
     @Test
     public void emptyList() {
-        List<Integer> list = new ArrayList<>();
-        Assertions.assertNull(function.secondMax(list));
+        Integer[] array = new Integer[0];
+        Assertions.assertNull(function.secondMax(array));
     }
 
     @Test
     public void singleInt() {
         int value = 10;
-        List<Integer> list = new ArrayList<>();
-        list.add(value);
+        Integer[] array = new Integer[1];
+        array[0] = value;
 
-        Assertions.assertEquals(value, function.secondMax(list));
+        Assertions.assertEquals(value, function.secondMax(array));
     }
 
     @Test
     public void secondMaxInHead() {
         int max = Integer.MAX_VALUE;
         int secondMax = Integer.MAX_VALUE - 1;
-        List<Integer> list = new ArrayList<>();
-        list.add(secondMax);
-        list.add(max);
-        for (int i = 0; i < 10; ++i) {
-            list.add(random.nextInt(Integer.MAX_VALUE - 2));
+        Integer[] array = new Integer[12];
+        array[0] = secondMax;
+        array[1] = max;
+        for (int i = 2; i < array.length; ++i) {
+            array[i] = random.nextInt(Integer.MAX_VALUE - 2);
         }
 
-        Assertions.assertEquals(secondMax, function.secondMax(list));
+        Assertions.assertEquals(secondMax, function.secondMax(array));
     }
 
     @Test
     public void secondMaxInTail() {
         int max = Integer.MAX_VALUE;
         int secondMax = Integer.MAX_VALUE - 1;
-        List<Integer> list = new ArrayList<>();
-        list.add(max);
-        for (int i = 0; i < 10; ++i) {
-            list.add(random.nextInt(Integer.MAX_VALUE - 2));
+        Integer[] array = new Integer[12];
+        array[0] = secondMax;
+        for (int i = 1; i < array.length - 1; ++i) {
+            array[i] = random.nextInt(Integer.MAX_VALUE - 2);
         }
-        list.add(secondMax);
+        array[array.length - 1] = max;
 
-        Assertions.assertEquals(secondMax, function.secondMax(list));
+        Assertions.assertEquals(secondMax, function.secondMax(array));
     }
 }
