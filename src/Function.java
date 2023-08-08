@@ -9,7 +9,7 @@ public class Function {
         Integer minimalValue = Math.min(values.get(0), values.get(1));
 
         values.remove(minimalValue);
-        if (minimalValue > values.get(values.get(values.size() - 1))) {
+        if (minimalValue > values.get(values.size() - 1)) {
             values.add(minimalValue);
         }
 
