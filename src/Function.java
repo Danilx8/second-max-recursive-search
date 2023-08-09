@@ -1,27 +1,31 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Function {
-    public Integer secondMax(Integer[] values) {
-        if (values.length == 0) return null;
-        if (values.length == 1) return values[0];
-
-        List<Integer> lesserValues = new ArrayList<>();
-        List<Integer> greaterValues = new ArrayList<>();
-        for (int i = 1; i < values.length; ++i) {
-            if (values[i] < values[0]) {
-                lesserValues.add(values[i]);
-            } else {
-                greaterValues.add(values[i]);
-            }
+    public static int secondMax(Integer[] array) {
+        if (array.length < 2) {
+            throw new IllegalArgumentException("Длина массива не может быть меньше двух");
         }
 
-        if (lesserValues.size() >= values.length - 1) {
-            return secondMax(lesserValues.toArray(new Integer[0]));
-        } else if (lesserValues.size() + 1 == values.length - 1) {
-            return values[0];
-        } else {
-            return secondMax(greaterValues.toArray(new Integer[0]));
-        }
+        return recursiveSearch(array, array.length - 1, Integer.MIN_VALUE, Integer.MIN_VALUE);
     }
+
+    private static int recursiveSearch(Integer[] array, int index, int largest, int secondLargest) {
+        if (index < 0) {
+            return secondLargest;
+        }
+
+        int current = array[index];
+
+        if (current > largest) {
+            secondLargest = largest;
+            largest = current;
+        } else if (current < largest && current > secondLargest) {
+            secondLargest = current;
+        }
+
+        return recursiveSearch(array, index - 1, largest, secondLargest);
+    }
+
 }
